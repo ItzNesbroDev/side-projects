@@ -1,0 +1,11 @@
+{
+  "name": "Movie Searcher",
+  "version": "1.0.0",
+  "description": "Search Movies, Series & Animes By Name",
+  "manifest_version": 3,
+  "author": "ItzNesbro",
+  "action": {
+    "default_popup": "index.html",
+    "default_title": "Movie Search"
+  }
+}
