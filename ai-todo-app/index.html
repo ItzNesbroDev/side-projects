@@ -1,94 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <meta name="viewport" content="width-device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do List</title>
+  <link rel="stylesheet" href="https://cdn.tailwindcss.com" />
 </head>
+<body class="bg-gray-200">
+  <div class="max-w-md mx-auto mt-8">
+    <h1 class="text-2xl font-bold text-center mb-4">To-Do List</h1>
 
-<body>
-<!-- HTML page with form element -->
-<form class="w-1/2 mx-auto" id="todo-form">
-  <input class="border rounded py-2 px-3" type="text" id="todo-input" placeholder="Add a to-do item">
-  <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">Add</button>
-</form>
+    <form class="flex items-center mb-4" id="todo-form">
+      <input class="flex-1 appearance-none rounded shadow p-3 mr-2" type="text" id="todo-input" placeholder="Add a to-do item">
+      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">Add</button>
+    </form>
 
-<!-- Unordered list to display to-do items -->
-<ul class="mt-4" id="todo-list"></ul>
+    <ul class="bg-white rounded shadow p-4" id="todo-list"></ul>
+  </div>
 
-<script>
-  // Get form, input, and list elements
-  const form = document.querySelector('#todo-form');
-  const input = document.querySelector('#todo-input');
-  const list = document.querySelector('#todo-list');
-
-  // Array to hold to-do items
-  let todoItems = [];
-
-  // Function to add a to-do item
-  function addTodo(text) {
-    // Create list item element
-    const item = document.createElement('li');
-    item.innerHTML = text;
-
-    // Create delete button element
-    const deleteButton = document.createElement('button');
-    deleteButton.classList.add('bg-red-500', 'hover:bg-red-700', 'text-white', 'font-bold', 'py-2', 'px-4', 'rounded');
-    deleteButton.innerHTML = 'Delete';
-
-    // Append delete button to list item
-    item.appendChild(deleteButton);
-
-    // Append list item to list
-    list.appendChild(item);
-
-    // Add to-do item to array
-    todoItems.push(text);
-
-    // Save to-do items to local storage
-    localStorage.setItem('todoItems', JSON.stringify(todoItems));
-  }
-
-  // Function to delete a to-do item
-  function deleteTodo(index) {
-    // Remove to-do item from array
-    todoItems.splice(index, 1);
-  // Save to-do items to local storage
-  localStorage.setItem('todoItems', JSON.stringify(todoItems));
-
-  // Reload page to update list
-  location.reload();
-}
-
-// Listen for submit event on form element
-form.addEventListener('submit', (event) => {
-  // Prevent default form submission behavior
-  event.preventDefault();
-
-  // Add to-do item
-  addTodo(input.value);
-
-  // Clear input field
-  input.value = '';
-});
-
-// Listen for click event on delete buttons
-list.addEventListener('click', (event) => {
-  if (event.target.tagName === 'BUTTON') {
-    // Get index of to-do item in array
-    const index = todoItems.indexOf(event.target.parentElement.textContent);
-
-    // Delete to-do item
-    deleteTodo(index);
-  }
-});
-
-// Load to-do items from local storage on page load
-window.addEventListener('load', () => {
-  const storedItems = localStorage.getItem('todoItems');
-  if (storedItems) {
-    todoItems = JSON.parse(storedItems);
-    todoItems.forEach((item) => {
-      addTodo(item);
-    });
-  }
-});
-</script>
+  <script src="script.js"></script>
 </body>
+</html>
+
